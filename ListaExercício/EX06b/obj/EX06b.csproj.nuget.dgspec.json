@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Projeto X\\ListaExercício\\EX06b\\EX06b.csproj": {}
+    "C:\\Projeto X\\Exercicios_Csharp\\ListaExercício\\EX06b\\EX06b.csproj": {}
   },
   "projects": {
-    "C:\\Projeto X\\ListaExercício\\EX06b\\EX06b.csproj": {
+    "C:\\Projeto X\\Exercicios_Csharp\\ListaExercício\\EX06b\\EX06b.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projeto X\\ListaExercício\\EX06b\\EX06b.csproj",
+        "projectUniqueName": "C:\\Projeto X\\Exercicios_Csharp\\ListaExercício\\EX06b\\EX06b.csproj",
         "projectName": "EX06b",
-        "projectPath": "C:\\Projeto X\\ListaExercício\\EX06b\\EX06b.csproj",
+        "projectPath": "C:\\Projeto X\\Exercicios_Csharp\\ListaExercício\\EX06b\\EX06b.csproj",
         "packagesPath": "C:\\Users\\GIOVANIXISCATTIARNDT\\.nuget\\packages\\",
-        "outputPath": "C:\\Projeto X\\ListaExercício\\EX06b\\obj\\",
+        "outputPath": "C:\\Projeto X\\Exercicios_Csharp\\ListaExercício\\EX06b\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\GIOVANIXISCATTIARNDT\\AppData\\Roaming\\NuGet\\NuGet.Config"

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Aula Deconto X\\Aula 2\\ListaExercício\\EX06a\\EX06a.csproj": {}
+    "C:\\Projeto X\\Exercicios_Csharp\\ListaExercício\\EX06a\\EX06a.csproj": {}
   },
   "projects": {
-    "C:\\Aula Deconto X\\Aula 2\\ListaExercício\\EX06a\\EX06a.csproj": {
+    "C:\\Projeto X\\Exercicios_Csharp\\ListaExercício\\EX06a\\EX06a.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Aula Deconto X\\Aula 2\\ListaExercício\\EX06a\\EX06a.csproj",
+        "projectUniqueName": "C:\\Projeto X\\Exercicios_Csharp\\ListaExercício\\EX06a\\EX06a.csproj",
         "projectName": "EX06a",
-        "projectPath": "C:\\Aula Deconto X\\Aula 2\\ListaExercício\\EX06a\\EX06a.csproj",
+        "projectPath": "C:\\Projeto X\\Exercicios_Csharp\\ListaExercício\\EX06a\\EX06a.csproj",
         "packagesPath": "C:\\Users\\GIOVANIXISCATTIARNDT\\.nuget\\packages\\",
-        "outputPath": "C:\\Aula Deconto X\\Aula 2\\ListaExercício\\EX06a\\obj\\",
+        "outputPath": "C:\\Projeto X\\Exercicios_Csharp\\ListaExercício\\EX06a\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\GIOVANIXISCATTIARNDT\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -58,7 +58,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.406/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.411/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

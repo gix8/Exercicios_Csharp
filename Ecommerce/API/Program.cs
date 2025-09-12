@@ -9,11 +9,11 @@ var app = builder.Build();
 List<Produto> produtos = new List<Produto>
 
     {
-        // new Produto { Nome = "Teclado", Preco = 120.99 },
-        // new Produto { Nome = "Mouse", Preco = 59.90 },
-        // new Produto { Nome = "Monitor", Preco = 899.00 },
-        // new Produto { Nome = "Notebook", Preco = 3499.99 },
-        // new Produto { Nome = "Headset", Preco = 199.50 }
+        new Produto { Nome = "Teclado", Preco = 120.99 },
+        new Produto { Nome = "Mouse", Preco = 59.90 },
+        new Produto { Nome = "Monitor", Preco = 899.00 },
+        new Produto { Nome = "Notebook", Preco = 3499.99 },
+        new Produto { Nome = "Headset", Preco = 199.50 }
     };
 
     // Exibindo os produtos
@@ -42,13 +42,31 @@ app.MapGet("/api/produto/listar", () =>
     return Results.BadRequest("Lista vazia");
 });
 
-app.MapPost("/api/produto/cadastrar", () =>
+app.MapPost("/api/produto/cadastrar", (Produto produto) =>
 {
-    Produto produto = new Produto();
-    produto.Nome = "Mouse Gamer";
-    produto.Quantidade = 12;
-    produto.Preco = 600;
+
+    foreach (Produto produtoCadastrado in produtos)
+    {
+        if (produtoCadastrado.Nome == produto.Nome)
+        {
+            return Results.Conflict("Produto já cadastrado!");
+        }
+    }
+
     produtos.Add(produto);
+    return Results.Created("", produto);
+});
+
+app.MapGet("/api/produto/buscar", () =>
+{
+    string nome = "Monitor";
+    //expressão lambda
+    Produto? resultado = produtos.FirstOrDefault(x => x.Nome.Contains(nome));
+    if (produtos == null)
+    {
+        return Results.NotFound("Produto não encontrado.");
+    }
+    return Results.Ok(resultado);
 });
 
 app.Run();

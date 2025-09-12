@@ -5,13 +5,15 @@ Console.Clear();
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
+//lista de produtos fixos
 List<Produto> produtos = new List<Produto>
+
     {
-        new Produto { Nome = "Teclado", Preco = 120.99 },
-        new Produto { Nome = "Mouse", Preco = 59.90 },
-        new Produto { Nome = "Monitor", Preco = 899.00 },
-        new Produto { Nome = "Notebook", Preco = 3499.99 },
-        new Produto { Nome = "Headset", Preco = 199.50 }
+        // new Produto { Nome = "Teclado", Preco = 120.99 },
+        // new Produto { Nome = "Mouse", Preco = 59.90 },
+        // new Produto { Nome = "Monitor", Preco = 899.00 },
+        // new Produto { Nome = "Notebook", Preco = 3499.99 },
+        // new Produto { Nome = "Headset", Preco = 199.50 }
     };
 
     // Exibindo os produtos
@@ -32,7 +34,12 @@ app.MapGet("/", () => "API de Produtos");
 
 app.MapGet("/api/produto/listar", () =>
 {
-    return produtos;
+    //valida se tem algo na lista
+    if (produtos.Count =! null)
+    {
+        return produtos;
+    }
+    return null;
 });
 
 app.MapPost("/api/produto/cadastrar", () =>

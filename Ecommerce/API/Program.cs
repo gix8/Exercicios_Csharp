@@ -35,11 +35,11 @@ app.MapGet("/", () => "API de Produtos");
 app.MapGet("/api/produto/listar", () =>
 {
     //valida se tem algo na lista
-    if (produtos.Count =! null)
+    if (produtos.Count != 0)
     {
-        return produtos;
+        return Results.Ok(produtos);
     }
-    return null;
+    return Results.BadRequest("Lista vazia");
 });
 
 app.MapPost("/api/produto/cadastrar", () =>

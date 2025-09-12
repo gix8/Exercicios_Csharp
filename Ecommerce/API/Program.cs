@@ -57,9 +57,8 @@ app.MapPost("/api/produto/cadastrar", (Produto produto) =>
     return Results.Created("", produto);
 });
 
-app.MapGet("/api/produto/buscar", () =>
+app.MapGet("/api/produto/buscar/{nome}", (string nome) =>
 {
-    string nome = "Monitor";
     //expressão lambda
     Produto? resultado = produtos.FirstOrDefault(x => x.Nome.Contains(nome));
     if (produtos == null)

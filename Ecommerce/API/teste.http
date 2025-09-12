@@ -3,3 +3,7 @@ GET http://localhost:5011/
 
 ### Requisição para a lista de produtos
 GET http://localhost:5011/api/produto/listar
+
+### Requisição para POST
+POST http://localhost:5011/api/produto/cadastrar
+Content-Type: application/json

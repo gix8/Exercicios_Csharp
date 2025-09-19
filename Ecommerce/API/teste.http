@@ -5,7 +5,19 @@ GET http://localhost:5011/
 GET http://localhost:5011/api/produto/listar
 
 ### Buscar produto por nome
-GET http://localhost:5011/api/produto/buscar
+GET http://localhost:5011/api/produto/buscar/Teclado
+
+### Remover produto por nome
+DELETE http://localhost:5011/api/produto/remover/Teclado
+
+### Alterar produto
+PUT http://localhost:5011/api/produto/alterar/Monitor
+Content-Type: application/json
+{
+    "nome" : "Monitor",
+    "quantidade" : 20 ,
+    "preco" : 850.0
+}
 
 ### Requisição para POST
 POST http://localhost:5011/api/produto/cadastrar

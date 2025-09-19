@@ -1,4 +1,5 @@
 using API.Models;
+using Microsoft.AspNetCore.Mvc;
 //using equivale ao import do java
 
 Console.Clear();
@@ -42,7 +43,7 @@ app.MapGet("/api/produto/listar", () =>
     return Results.BadRequest("Lista vazia");
 });
 
-app.MapPost("/api/produto/cadastrar", (Produto produto) =>
+app.MapPost("/api/produto/cadastrar", ([FromBody] Produto produto) =>
 {
 
     foreach (Produto produtoCadastrado in produtos)
@@ -57,15 +58,40 @@ app.MapPost("/api/produto/cadastrar", (Produto produto) =>
     return Results.Created("", produto);
 });
 
-app.MapGet("/api/produto/buscar/{nome}", (string nome) =>
+app.MapGet("/api/produto/buscar/{nome}", ([FromRoute] string nome) =>
 {
     //expressão lambda
     Produto? resultado = produtos.FirstOrDefault(x => x.Nome.Contains(nome));
-    if (produtos == null)
+    if (resultado == null)
     {
         return Results.NotFound("Produto não encontrado.");
     }
     return Results.Ok(resultado);
+});
+
+app.MapDelete("/api/produto/remover/{nome}", ([FromRoute] string nome) =>
+{
+    Produto? resultado = produtos.FirstOrDefault(x => x.Nome.Contains(nome));
+    if (resultado == null)
+    {
+        return Results.NotFound("Produto não encontrado.");
+    }
+    produtos.Remove(resultado);
+    return Results.Ok(" item removido com sucesso!");
+});
+
+app.MapPut("/api/produtos/alterar/{id}", (int id, Produto produtoAtualizado, List<Produto> produtos) =>
+{
+    var produto = produtos.FirstOrDefault(p => p.Id == id);
+    if (produto is null)
+        return Results.NotFound("Produto não encontrado");
+
+    produto.Nome = produtoAtualizado.Nome;
+    produto.Preco = produtoAtualizado.Preco;
+    produto.CriadoEm = produtoAtualizado.CriadoEm;
+    produto.Quantidade = produtoAtualizado.Quantidade;
+
+    return Results.Ok(produto);
 });
 
 app.Run();

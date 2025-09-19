@@ -11,10 +11,10 @@ GET http://localhost:5011/api/produto/buscar/Teclado
 DELETE http://localhost:5011/api/produto/remover/Teclado
 
 ### Alterar produto
-PATCH  http://localhost:5011/api/produto/alterar/7980a348-b2c9-46dc-9a94-d8966c6e6ece
+POST  http://localhost:5011/api/produto/alterar/a311d0a6-a735-4666-95c8-012fa679f7c1
 Content-Type: application/json
 {
-    "nome" : "Monitor",
+    "nome" : "Teclado Gamer",
     "quantidade" : 20 ,
     "preco" : 850.0
 }

@@ -12,7 +12,7 @@ namespace API.Models
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlite("Data Source=nomeDoSeuBanco.db");
+        optionsBuilder.UseSqlite("Data Source=Ecommerce.db");
     }
     }
 }

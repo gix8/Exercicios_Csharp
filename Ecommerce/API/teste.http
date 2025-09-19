@@ -11,7 +11,7 @@ GET http://localhost:5011/api/produto/buscar/Teclado
 DELETE http://localhost:5011/api/produto/remover/Teclado
 
 ### Alterar produto
-PUT http://localhost:5011/api/produto/alterar/Monitor
+PATCH  http://localhost:5011/api/produto/alterar/7980a348-b2c9-46dc-9a94-d8966c6e6ece
 Content-Type: application/json
 {
     "nome" : "Monitor",

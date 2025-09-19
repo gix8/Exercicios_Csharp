@@ -80,18 +80,16 @@ app.MapDelete("/api/produto/remover/{nome}", ([FromRoute] string nome) =>
     return Results.Ok(" item removido com sucesso!");
 });
 
-app.MapPut("/api/produtos/alterar/{id}", (int id, Produto produtoAtualizado, List<Produto> produtos) =>
+app.MapPatch("/api/produtos/alterar/{id}", ([FromRoute] int id, [FromBody] Produto produtoAlterado) =>
 {
-    var produto = produtos.FirstOrDefault(p => p.Id == id);
-    if (produto is null)
+    var resultado = produtos.FirstOrDefault(p => p.Id == id.ToString());
+    if (resultado is null)
         return Results.NotFound("Produto não encontrado");
+    resultado.Nome = produtoAlterado.Nome;
+    resultado.Preco = produtoAlterado.Preco;
+    resultado.Quantidade = produtoAlterado.Quantidade;
 
-    produto.Nome = produtoAtualizado.Nome;
-    produto.Preco = produtoAtualizado.Preco;
-    produto.CriadoEm = produtoAtualizado.CriadoEm;
-    produto.Quantidade = produtoAtualizado.Quantidade;
-
-    return Results.Ok(produto);
+    return Results.Ok(resultado);
 });
 
 app.Run();

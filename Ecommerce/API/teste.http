@@ -25,7 +25,7 @@ POST http://localhost:5011/api/produto/cadastrar
 Content-Type: application/json
 
 {
-  "nome": "Webcam",
-  "preco": 199.99,
-  "quantidade": 5
+  "nome": "NiggaBot",
+  "preco": 2000.00,
+  "quantidade": 9
 }

@@ -11,8 +11,9 @@ GET http://localhost:5011/api/produto/buscar/Teclado
 DELETE http://localhost:5011/api/produto/remover/Teclado
 
 ### Alterar produto
-POST  http://localhost:5011/api/produto/alterar/a311d0a6-a735-4666-95c8-012fa679f7c1
+POST  http://localhost:5011/api/produto/alterar/7d5de9a9-0c16-472f-bf5b-99cb93b87cc0
 Content-Type: application/json
+
 {
     "nome" : "Teclado Gamer",
     "quantidade" : 20 ,
@@ -22,8 +23,9 @@ Content-Type: application/json
 ### Requisição para POST
 POST http://localhost:5011/api/produto/cadastrar
 Content-Type: application/json
+
 {
-    "nome" : "Notebook",
-    "quantidade" : 11 ,
-    "preco" : 1450.5
+  "nome": "Webcam",
+  "preco": 199.99,
+  "quantidade": 5
 }

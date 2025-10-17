@@ -8,6 +8,16 @@ var builder = WebApplication.CreateBuilder(args);
 // Adicionar Serviço de banco de dados na aplicação
 builder.Services.AddDbContext<AppDataContext>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
+
 var app = builder.Build();
 
 //lista de produtos fixos
@@ -96,5 +106,7 @@ app.MapPost("/api/produtos/alterar/{id}", (string id, [FromBody] Produto produto
     ctx.SaveChanges();
     return Results.Ok(resultado);
 });
+
+app.UseCors("AllowAll");
 
 app.Run();

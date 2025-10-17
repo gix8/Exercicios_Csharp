@@ -21,6 +21,8 @@ function ListarProdutos() {
             if (!resposta.ok) {
                 throw new Error("Não foi possível obter a lista de produtos." + resposta.statusText);
             }
+
+            const dados = await resposta.json();
         console.log({resposta});
         } catch (error) {
             console.log("Deu erro ao obter produtos.", error);

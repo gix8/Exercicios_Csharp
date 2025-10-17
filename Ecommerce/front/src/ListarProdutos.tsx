@@ -23,6 +23,7 @@ function ListarProdutos() {
             }
 
             const dados = await resposta.json();
+            console.log({dados});
         console.log({resposta});
         } catch (error) {
             console.log("Deu erro ao obter produtos.", error);

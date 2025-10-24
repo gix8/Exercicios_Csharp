@@ -25,7 +25,7 @@ POST http://localhost:5011/api/produto/cadastrar
 Content-Type: application/json
 
 {
-  "nome": "NiggaRocket",
-  "preco": 99000.00,
-  "quantidade": 1
+  "nome": "MegaScoliosis",
+  "preco": 1200.00,
+  "quantidade": 3
 }

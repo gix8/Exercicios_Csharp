@@ -1,13 +1,12 @@
-import React from 'react'
-import ListarProdutos from './ListarProdutos';
+import React from 'react';
+import ProdutosPage from './pages/ProdutosPage';
 
 //Componentes
 // - HTML, CSS e JS/TS
 function App() {
   return (
     <div className="App">
-      <h1>React aplicação primeira minha em!</h1>
-      <ListarProdutos/>
+      <ProdutosPage />
     </div>
   );
 }

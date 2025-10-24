@@ -1,19 +1,28 @@
 import React, { useState } from 'react';
+import { Header } from '../components/Header';
 import CadastrarProduto from '../components/CadastrarProduto';
 import ListarProdutos from '../components/ListarProdutos';
-import Header from '../components/Header';
 
 const ProdutosPage: React.FC = () => {
   const [reload, setReload] = useState(0);
-  const [page, setPage] = useState<'cadastro' | 'lista'>('lista');
+  const [activeTab, setActiveTab] = useState<'list' | 'register'>('list');
+
   return (
-    <>
-      <Header onNavigate={setPage} active={page} />
-      <div>
-        {page === 'cadastro' && <CadastrarProduto onProdutoCadastrado={() => { setReload(r => r + 1); setPage('lista'); }} />}
-        {page === 'lista' && <ListarProdutos key={reload} />}
-      </div>
-    </>
+    <div className="flex min-h-screen flex-col">
+      <Header activeTab={activeTab} onTabChange={setActiveTab} />
+      <main className="flex-1 container mx-auto px-4 py-8">
+        {activeTab === 'register' ? (
+          <CadastrarProduto
+            onProdutoCadastrado={() => {
+              setReload(r => r + 1);
+              setActiveTab('list');
+            }}
+          />
+        ) : (
+          <ListarProdutos key={reload} />
+        )}
+      </main>
+    </div>
   );
 };
 

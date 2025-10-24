@@ -1,11 +1,9 @@
 import React from 'react';
 import ProdutosPage from './pages/ProdutosPage';
 
-//Componentes
-// - HTML, CSS e JS/TS
 function App() {
   return (
-    <div className="App">
+    <div className="min-h-screen bg-background font-sans antialiased">
       <ProdutosPage />
     </div>
   );

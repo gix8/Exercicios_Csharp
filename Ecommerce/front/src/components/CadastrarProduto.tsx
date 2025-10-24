@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Produto from "../models/Produto";
-import "../ListarProdutos.css";
+import "../Index.css";
 
 interface Props {
   onProdutoCadastrado?: (produto: Produto) => void;

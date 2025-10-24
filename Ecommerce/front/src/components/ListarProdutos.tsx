@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../ListarProdutos.css";
+import "../Index.css";
 import Produto from "../models/Produto";
 
 const ListarProdutos: React.FC = () => {

@@ -25,7 +25,7 @@ POST http://localhost:5011/api/produto/cadastrar
 Content-Type: application/json
 
 {
-  "nome": "MegaScoliosis",
-  "preco": 1200.00,
-  "quantidade": 3
+  "nome": "Asrock B450M Steel Legend",
+  "preco": 2000.00,
+  "quantidade": 5
 }

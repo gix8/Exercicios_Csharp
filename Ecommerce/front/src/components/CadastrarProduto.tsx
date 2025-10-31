@@ -42,7 +42,7 @@ const CadastrarProduto: React.FC<Props> = ({ onProdutoCadastrado }) => {
       criadoEm: new Date().toISOString(),
     };
     try {
-      const resp = await fetch("http://localhost:5000/api/produto/cadastrar", {
+      const resp = await fetch("http://localhost:5011/api/produto/cadastrar", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(novoProduto),

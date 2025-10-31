@@ -1,12 +1,8 @@
 import React from 'react';
-import ProdutosPage from './pages/ProdutosPage';
+import Produtos from './pages/Produtos';
 
 function App() {
-  return (
-    <div className="min-h-screen bg-background font-sans antialiased">
-      <ProdutosPage />
-    </div>
-  );
+  return <Produtos />;
 }
 
 export default App;

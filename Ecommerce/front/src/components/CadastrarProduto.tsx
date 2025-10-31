@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { Package } from "lucide-react";
-import { Button } from "./ui/button";
-import Produto from "../models/Produto";
+import { Produto } from "../types/Produto";
+import "./Produtos.css";
 
 interface Props {
   onProdutoCadastrado?: (produto: Produto) => void;
@@ -11,134 +10,122 @@ const CadastrarProduto: React.FC<Props> = ({ onProdutoCadastrado }) => {
   const [nome, setNome] = useState("");
   const [descricao, setDescricao] = useState("");
   const [preco, setPreco] = useState("");
-  const [quantidade, setQuantidade] = useState(1);
+  const [quantidade, setQuantidade] = useState("");
   const [loading, setLoading] = useState(false);
-  const [erro, setErro] = useState<string | null>(null);
-  const [sucesso, setSucesso] = useState(false);
+  const [erro, setErro] = useState("");
+  const [sucesso, setSucesso] = useState("");
+  const [aberto, setAberto] = useState(true);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    setErro("");
+    setSucesso("");
     setLoading(true);
-    setErro(null);
-    setSucesso(false);
-    let precoNum = Number(preco.replace(",", "."));
-    if (isNaN(precoNum) || precoNum < 0) {
-      setErro("Digite um preço válido.");
+    // Validação de preço
+    const precoNum = Number(preco.replace(",", "."));
+    if (isNaN(precoNum) || precoNum <= 0) {
+      setErro("Preço inválido.");
       setLoading(false);
       return;
     }
+    if (!nome.trim() || !descricao.trim() || !quantidade.trim()) {
+      setErro("Preencha todos os campos.");
+      setLoading(false);
+      return;
+    }
+    const novoProduto: Produto = {
+      id: crypto.randomUUID(),
+      nome,
+      descricao,
+      preco: precoNum,
+      quantidade: Number(quantidade),
+      criadoEm: new Date().toISOString(),
+    };
     try {
-      const resposta = await fetch(
-        "http://localhost:5011/api/produto/cadastrar",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ nome, descricao, preco: precoNum, quantidade }),
-        }
-      );
-      if (!resposta.ok) {
-        throw new Error("Erro ao cadastrar produto: " + resposta.statusText);
+      const resp = await fetch("http://localhost:5000/api/produto/cadastrar", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(novoProduto),
+      });
+      if (!resp.ok) {
+        const msg = await resp.text();
+        setErro(msg || "Erro ao cadastrar produto");
+        setLoading(false);
+        return;
       }
-      const produto: Produto = await resposta.json();
-      setSucesso(true);
       setNome("");
       setDescricao("");
       setPreco("");
-      setQuantidade(1);
-      if (onProdutoCadastrado) onProdutoCadastrado(produto);
-    } catch (err: any) {
-      setErro(err?.message ?? "Erro desconhecido");
+      setQuantidade("");
+      setSucesso("Produto cadastrado com sucesso!");
+      onProdutoCadastrado?.(novoProduto);
+    } catch (e: any) {
+      setErro(e.message || "Erro ao cadastrar produto");
     } finally {
       setLoading(false);
     }
   }
 
   return (
-    <div className="mx-auto max-w-2xl space-y-8">
-      <div className="flex items-center gap-2">
-        <Package className="h-6 w-6 text-primary" />
-        <h2 className="text-3xl font-bold tracking-tight text-foreground">Cadastrar Produto</h2>
-      </div>
-
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="space-y-2">
-          <label className="text-sm font-medium text-foreground">
-            Nome do Produto
-          </label>
-          <input
-            type="text"
-            value={nome}
-            onChange={(e) => setNome(e.target.value)}
-            required
-            className="w-full rounded-md border bg-background/50 px-3 py-2 text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-            placeholder="Digite o nome do produto"
-          />
-        </div>
-
-        <div className="space-y-2">
-          <label className="text-sm font-medium text-foreground">
-            Descrição
-          </label>
-          <textarea
-            value={descricao}
-            onChange={(e) => setDescricao(e.target.value)}
-            required
-            className="w-full rounded-md border bg-background/50 px-3 py-2 text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring min-h-[100px]"
-            placeholder="Digite a descrição do produto"
-          />
-        </div>
-
-        <div className="grid grid-cols-2 gap-4">
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-foreground">
-              Preço (R$)
+    <div>
+      <button className="toggle-btn" onClick={() => setAberto((a) => !a)}>
+        {aberto ? "Fechar formulário" : "Cadastrar Produto"}
+      </button>
+      {aberto && (
+        <div className="form-wrapper">
+          <form
+            className="produto-form"
+            onSubmit={handleSubmit}
+            autoComplete="off"
+          >
+            <label>
+              Nome:
+              <input
+                className="input"
+                value={nome}
+                onChange={(e) => setNome(e.target.value)}
+                required
+              />
             </label>
-            <input
-              type="text"
-              value={preco}
-              onChange={(e) => setPreco(e.target.value)}
-              required
-              className="w-full rounded-md border bg-background/50 px-3 py-2 text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-              placeholder="0,00"
-            />
-          </div>
-
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-foreground">
-              Quantidade
+            <label>
+              Descrição:
+              <textarea
+                className="textarea"
+                value={descricao}
+                onChange={(e) => setDescricao(e.target.value)}
+                required
+              />
             </label>
-            <input
-              type="number"
-              value={quantidade}
-              onChange={(e) => setQuantidade(Number(e.target.value))}
-              min={1}
-              required
-              className="w-full rounded-md border bg-background/50 px-3 py-2 text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-            />
-          </div>
+            <label>
+              Preço:
+              <input
+                className="input"
+                value={preco}
+                onChange={(e) => setPreco(e.target.value)}
+                required
+              />
+            </label>
+            <label>
+              Quantidade:
+              <input
+                className="input"
+                value={quantidade}
+                onChange={(e) => setQuantidade(e.target.value)}
+                required
+              />
+            </label>
+            <button
+              className="toggle-btn"
+              type="submit"
+              disabled={loading}
+            >
+              {loading ? "Cadastrando..." : "Cadastrar"}
+            </button>
+            {erro && <div className="mensagem erro">{erro}</div>}
+            {sucesso && <div className="mensagem">{sucesso}</div>}
+          </form>
         </div>
-
-        {erro && (
-          <div className="rounded-md bg-destructive/10 p-3 text-sm text-destructive">
-            {erro}
-          </div>
-        )}
-
-        {sucesso && (
-          <div className="rounded-md bg-primary/10 p-3 text-sm text-primary">
-            Produto cadastrado com sucesso!
-          </div>
-        )}
-
-        <Button
-          type="submit"
-          disabled={loading}
-          className="w-full"
-          variant="gradient"
-        >
-          {loading ? "Cadastrando..." : "Cadastrar Produto"}
-        </Button>
-      </form>
+      )}
     </div>
   );
 };
